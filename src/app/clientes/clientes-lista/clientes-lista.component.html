@@ -1,0 +1,105 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Consulta</li>
+</ol>
+
+<div class="container">
+
+  <!-- Alertas -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- Sucesso -->
+      <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+        {{ mensagemSucesso }}
+      </div>
+
+      <!-- Erro -->
+      <div class="alert alert-danger" role="alert" *ngFor="mensagemErro">
+        {{ mensagemErro }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Botao novo cliente-->
+  <div class="col-md-2">
+    <button type="button" class="btn btn-warning" (click)="novoCadastro()">
+      <i class="fa fa-plus"></i>
+      Novo
+    </button>
+  </div>
+  <br />
+
+  <!-- Tabela de clientes -->
+  <div class="col-md-12">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data Cadastro</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.id }}</td>
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.cpf }}</td>
+          <td>{{ cliente.dataCadastro }}</td>
+          <td>
+
+            <!-- Botao editar -->
+            <button class="btn btn-primary ml-1" 
+                    routerLink="/clientes-form/{{ cliente.id }}">
+              <i class="fa fa-edit"></i>
+            </button>
+
+            <!-- Botao deletar -->
+            <button class="btn btn-danger ml-1" (click)="prepararDelecao(cliente)"
+                    data-toggle="modal" data-target="#modalDelecao">
+              <i class="fa fa-trash-alt"></i>
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal de Deleção -->
+  <div id="modalDelecao" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h4>Confirmação</h4>
+        </div>
+        
+        <div class="modal-body" *ngIf="clienteSelecionado.id">
+          Você confirma a exclução do(a) cliente {{ clienteSelecionado.nome }}?
+        </div>
+
+        <div class="modal-footer">
+          
+          <!-- Botao Confirma -->
+          <button class="btn btn-success ml-1" (click)="deletarCliente()"
+                 data-dismiss="modal">
+            <i class="fa fa-check"></i>
+            Confirmar
+          </button>
+
+          <!-- Botao Cancela -->
+          <button class="btn btn-danger ml-1" data-dismiss="modal">
+            <i class="fa fa-window-close"></i>
+            Cancelar
+          
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
