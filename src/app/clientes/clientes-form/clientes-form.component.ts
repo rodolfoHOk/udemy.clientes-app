@@ -56,6 +56,7 @@ export class ClientesFormComponent implements OnInit {
 
   onSubmit(){
     this.success = false;
+    this.errors = [];
     if(this.id){
       this.service
         .atualizar(this.cliente)

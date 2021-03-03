@@ -8,7 +8,10 @@ import { ClientesListaComponent } from './clientes-lista/clientes-lista.componen
 
 
 @NgModule({
-  declarations: [ClientesFormComponent, ClientesListaComponent],
+  declarations: [
+    ClientesFormComponent,
+    ClientesListaComponent
+  ],
   imports: [
     CommonModule,
     ClientesRoutingModule,

@@ -1,0 +1,143 @@
+<h1 class="mt-4">Serviços Prestados</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Consulta</li>
+</ol>
+
+<div class="container">
+  <form #servicosList="ngForm" (ngSubmit)="consultar()">
+
+    <!-- Alertas -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <!-- Sucesso -->
+        <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+          {{ mensagemSucesso }}
+        </div>
+
+        <!-- Erro -->
+        <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+          {{ mensagemErro }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+
+      <!-- Cliente: (id) -->
+      <div class="col-md-8">
+        <div class="form-group">
+          <label for="inputNome">Nome do Cliente: </label>
+          <input type="text" class="form-control" id="inputNome"
+                 [(ngModel)]="nome" name="nome" />
+        </div>
+      </div>
+
+      <!-- Mês: (numero) -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inputMes">Mês: </label>
+          <select class="form-control" id="inputMes"
+                  [(ngModel)]="mes" name="mes">
+            <option value="" >Selecione...</option>
+            <option *ngFor="let mes of meses" [ngValue]="mes">
+              {{ mes }}
+            </option>
+          </select>
+        </div>
+      </div>
+    
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-4">
+        
+        <!-- Botao Consultar -->
+        <button type="submit" class="btn btn-primary ml-1">
+          <i class="fa fa-search"></i>
+          Consultar
+        </button>
+
+        <!-- Botao novo servico -->
+        <button type="button" class="btn btn-warning ml-1" (click)="novoCadastro()">
+            <i class="fa fa-plus"></i>
+            Novo
+          </button>
+
+      </div>
+    </div>
+
+  </form>
+
+  <br />
+
+  <!-- Tabela de Servicos Prestados-->
+  <div class="col-md-12">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Descriçãoo</th>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servico of lista">
+          <td>{{ servico.id }}</td>
+          <td>{{ servico.cliente?.nome }}</td>
+          <td>{{ servico.descricao }}</td>
+          <td>{{ servico.data }}</td>
+          <td>{{ servico.valor }}</td>
+          <td>
+            
+            <!-- Botao editar -->
+            <button class="btn btn-primary ml-1" 
+                    routerLink="/servicos-prestados-form/{{ servico.id }}">
+              <i class="fa fa-edit"></i>
+            </button>
+
+            <!-- Botao deletar -->
+            <button class="btn btn-danger ml-1" (click)="prepararDelecao(servico)"
+                    data-toggle="modal" data-target="#modalDelecao">
+              <i class="fa fa-trash-alt"></i>
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal de deleção -->
+  <div class="modal fade" id="modalDelecao" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modalDelecaoLabel">Confirmação</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Você confirma a deleção do serviço?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" 
+                  (click)="deletarServico()"data-dismiss="modal">
+            Confirmar
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
