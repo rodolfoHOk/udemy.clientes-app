@@ -92,7 +92,7 @@ export class ServicosPrestadosFormComponent implements OnInit {
   }
 
   voltarLista(){
-    this.router.navigate(['/servicos-prestados-list']);
+    this.router.navigate(['/servicos-prestados/lista']);
   }
 
 }
