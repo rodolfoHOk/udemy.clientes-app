@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AutenticacaoService } from '../autenticacao.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,28 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  username: string = "";
-  password: string = "";
-  loginError: boolean = false;
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor( private router : Router) { }
+  constructor( 
+              private router : Router,
+              private service : AutenticacaoService             
+  ) { }
 
   onSubmit(){
-    console.log(`User: ${this.username}, Pass: ${this.password}`);
-    this.router.navigate(['/home'])
+    // console.log(`User: ${this.username}, Pass: ${this.password}`);
+    this.errorMessage = '';
+    this.service
+              .tentarLogar(this.username, this.password)
+              .subscribe( response => {
+                // console.log(response);
+                const access_token = JSON.stringify(response);
+                localStorage.setItem('access_token', access_token);
+                this.router.navigate(['/home']);
+              }, errorResponse => {
+                  this.errorMessage = "Nome de usuário e/ou senha incorreto(s)!";
+              });
   }
 
 }

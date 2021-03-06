@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as jQuery from 'jquery'; // contornando erro do import
+import { AutenticacaoService } from 'src/app/autenticacao.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +11,18 @@ import * as jQuery from 'jquery'; // contornando erro do import
 })
 export class SidebarComponent implements AfterViewInit {
 
-  constructor() { }
+  usuarioLogado: string = ""
+
+  constructor(
+    private autenticacaoService : AutenticacaoService,
+    private router : Router
+  ) { }
 
   ngAfterViewInit() {
+
+    this.usuarioLogado = this.autenticacaoService.getUsuarioAutenticado();
+
+    // para funcionar o botão de menu da navbar para abrir e fechar a sidebar
     (function($) {
       "use strict";
   
@@ -29,6 +40,11 @@ export class SidebarComponent implements AfterViewInit {
           $("body").toggleClass("sb-sidenav-toggled");
       });
     })(jQuery);
+  }
+
+  deslogar(){
+    this.autenticacaoService.encerrarSessao();
+    this.router.navigate(['/login']);
   }
 
 }

@@ -4,99 +4,106 @@
 
 <br />
 
-<div id="layoutAuthentication">
-  <div id="layoutAuthentication_content">
-    <main>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5">
-            
-            <!-- Card de Registrar novo usuário-->
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
+<div class="bg-primary">
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5">
               
-              <!-- Cabeçalho do Card-->
-              <div class="card-header">
-                <h3 class="text-center font-weight-light my-4">Cadastrar Usuário</h3>
-              </div>
-              
-              <!-- Corpo do Card -->
-              <div class="card-body">
+              <!-- Card de Registrar novo usuário-->
+              <div class="card shadow-lg border-0 rounded-lg mt-5">
                 
-                <!-- Alerta de Erro de Registro-->
-                <div class="alert alert-danger" *ngIf="errorMessage">
-                  {{ errorMessage }}
+                <!-- Cabeçalho do Card-->
+                <div class="card-header">
+                  <h3 class="text-center font-weight-light my-4">Cadastrar Usuário</h3>
                 </div>
+                
+                <!-- Corpo do Card -->
+                <div class="card-body">
 
-                <!-- Formulário de Registro -->
-                <form #registerForm="ngForm" (submit)="onSubmit()">
-
-                  <!-- Nome Completo -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputName">
-                      Nome Completo
-                    </label>
-                    <input class="form-control py-4" id="inputName" 
-                          type="email" placeholder="Digite seu nome completo"
-                          [(ngModel)]="name" name="name" />
-                  </div>
-
-                  <!-- E-mail -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputEmail">
-                      E-mail
-                    </label>
-                    <input class="form-control py-4" id="inputEmail" 
-                          type="email" placeholder="Digite seu e-mail"
-                          [(ngModel)]="email" name="email" />
+                  <!-- Alerta de Sucesso -->
+                  <div class="alert alert-success" *ngIf="successMessage">
+                    "{{ successMessage }}"
                   </div>
                   
-                  <!-- Nome de usuário -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputUsername">
-                      Nome de Usuário
-                    </label>
-                    <input class="form-control py-4" id="inputUsername" 
-                          type="email" placeholder="Digite seu nome de usuário"
-                          [(ngModel)]="username" name="username" />
-                  </div>
-                  
-                  <!-- Senha -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputPassword">
-                      Senha
-                    </label>
-                    <input class="form-control py-4" id="inputPassword" 
-                          type="password" placeholder="Digite sua senha"
-                          [(ngModel)]="password" name="password" />
+                  <!-- Alerta de Erro de Registro-->
+                  <div class="alert alert-danger" *ngFor="let errorMessage of errorsMessages">
+                    {{ errorMessage }}
                   </div>
 
+                  <!-- Formulário de Registro -->
+                  <form #registerForm="ngForm" (submit)="onSubmit()">
 
-                  <!-- Botão de Logar -->
-                  <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <button type="submit" class="btn btn-primary">
-                      Cadastrar
-                    </button>
-                    <button type="button" class="btn btn-warning" routerLink="/login">
-                      Logar
-                    </button>
-                  </div>
+                    <!-- Nome Completo -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputName">
+                        Nome Completo
+                      </label>
+                      <input class="form-control py-4" id="inputName" 
+                            type="email" placeholder="Digite seu nome completo"
+                            [(ngModel)]="name" name="name" />
+                    </div>
 
-                </form>
-              </div>
-              
-              <!-- Link para registrar novo usuario -->
-              <div class="card-footer text-center">
-                <div class="small">
-                  <a routerLink="/login">
-                    Já possui uma conta? Entre!
-                  </a>
+                    <!-- E-mail -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputEmail">
+                        E-mail
+                      </label>
+                      <input class="form-control py-4" id="inputEmail" 
+                            type="email" placeholder="Digite seu e-mail"
+                            [(ngModel)]="email" name="email" />
+                    </div>
+                    
+                    <!-- Nome de usuário -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputUsername">
+                        Nome de Usuário
+                      </label>
+                      <input class="form-control py-4" id="inputUsername" 
+                            type="email" placeholder="Digite seu nome de usuário"
+                            [(ngModel)]="username" name="username" autocomplete="off"/>
+                    </div>
+                    
+                    <!-- Senha -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputPassword">
+                        Senha
+                      </label>
+                      <input class="form-control py-4" id="inputPassword" 
+                            type="password" placeholder="Digite sua senha"
+                            [(ngModel)]="password" name="password" />
+                    </div>
+
+
+                    <!-- Botão de Logar -->
+                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                      <button type="submit" class="btn btn-primary">
+                        Cadastrar
+                      </button>
+                      <button type="button" class="btn btn-warning" routerLink="/login">
+                        Logar
+                      </button>
+                    </div>
+
+                  </form>
                 </div>
-              </div>
+                
+                <!-- Link para registrar novo usuario -->
+                <div class="card-footer text-center">
+                  <div class="small">
+                    <a routerLink="/login">
+                      Já possui uma conta? Entre!
+                    </a>
+                  </div>
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </div>

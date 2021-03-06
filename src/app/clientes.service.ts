@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Cliente } from './clientes/cliente';
 import { Observable } from 'rxjs';
@@ -17,10 +17,28 @@ export class ClientesService {
   }
 
   salvar( cliente : Cliente ) : Observable<Cliente> {
+     /* Teste
+     const tokenString : any = localStorage.getItem('access_token');
+     const token = JSON.parse(tokenString);
+     const headers : HttpHeaders = new HttpHeaders({
+       'Authorization' : 'Bearer ' + token.access_token
+     });
+    return this.http.post<Cliente>(this.apiURL, cliente, { headers }); 
+    */
+   
     return this.http.post<Cliente>(this.apiURL, cliente);
   }
 
   getClientes() : Observable<Cliente[]> {
+    /* Teste 
+    const tokenString : any = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString);
+    const headers : HttpHeaders = new HttpHeaders({
+      'Authorization' : 'Bearer ' + token.access_token
+    });
+    return this.http.get<Cliente[]>(this.apiURL, { headers }); 
+    */
+
     return this.http.get<Cliente[]>(this.apiURL);
   }
 

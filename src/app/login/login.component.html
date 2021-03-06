@@ -3,78 +3,79 @@
 </nav>
 
 <br />
-
-<div id="layoutAuthentication">
-  <div id="layoutAuthentication_content">
-    <main>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5">
-            
-            <!-- Card de Login-->
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
+<div class="bg-primary">
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5">
               
-              <!-- Cabeçalho do Card-->
-              <div class="card-header">
-                <h3 class="text-center font-weight-light my-4">Logar</h3>
-              </div>
-              
-              <!-- Corpo do Card -->
-              <div class="card-body">
+              <!-- Card de Login-->
+              <div class="card shadow-lg border-0 rounded-lg mt-5">
                 
-                <!-- Alerta de Erro de Login-->
-                <div class="alert alert-danger" *ngIf="loginError">
-                  Nome de usuário e/ou senha incorreto(a).
+                <!-- Cabeçalho do Card-->
+                <div class="card-header">
+                  <h3 class="text-center font-weight-light my-4">Logar</h3>
+                </div>
+                
+                <!-- Corpo do Card -->
+                <div class="card-body">
+                  
+                  <!-- Alerta de Erro de Login-->
+                  <div class="alert alert-danger" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+
+                  <!-- Formulário de Login -->
+                  <form #loginForm="ngForm" (submit)="onSubmit()">
+                    
+                    <!-- Nome de usuário -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputUsername">
+                        Nome de Usuário
+                      </label>
+                      <input class="form-control py-4" id="inputUsername" 
+                            type="email" placeholder="Digite seu nome de usuário"
+                            [(ngModel)]="username" name="username" autocomplete="off"/>
+                    </div>
+                    
+                    <!-- Senha -->
+                    <div class="form-group">
+                      <label class="small mb-1" for="inputPassword">
+                        Senha
+                      </label>
+                      <input class="form-control py-4" id="inputPassword" 
+                            type="password" placeholder="Digite sua senha"
+                            [(ngModel)]="password" name="password" />
+                    </div>
+
+
+                    <!-- Botão de Logar -->
+                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                      <p></p>
+                      <button type="submit" class="btn btn-primary">
+                        Entrar
+                      </button>
+                    </div>
+
+                  </form>
+                </div>
+                
+                <!-- Link para registrar novo usuario -->
+                <div class="card-footer text-center">
+                  <div class="small">
+                    <a routerLink="/registrar">
+                      Precisa de uma conta? Cadastre-se!
+                    </a>
+                  </div>
                 </div>
 
-                <!-- Formulário de Login -->
-                <form #loginForm="ngForm" (submit)="onSubmit()">
-                  
-                  <!-- Nome de usuário -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputUsername">
-                      Nome de Usuário
-                    </label>
-                    <input class="form-control py-4" id="inputUsername" 
-                          type="email" placeholder="Digite seu nome de usuário"
-                          [(ngModel)]="username" name="username" />
-                  </div>
-                  
-                  <!-- Senha -->
-                  <div class="form-group">
-                    <label class="small mb-1" for="inputPassword">
-                      Senha
-                    </label>
-                    <input class="form-control py-4" id="inputPassword" 
-                          type="password" placeholder="Digite sua senha"
-                          [(ngModel)]="password" name="password" />
-                  </div>
-
-
-                  <!-- Botão de Logar -->
-                  <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <p></p>
-                    <button type="submit" class="btn btn-primary">
-                      Entrar
-                    </button>
-                  </div>
-
-                </form>
               </div>
-              
-              <!-- Link para registrar novo usuario -->
-              <div class="card-footer text-center">
-                <div class="small">
-                  <a routerLink="/registrar">
-                    Precisa de uma conta? Cadastre-se!
-                  </a>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </div>
